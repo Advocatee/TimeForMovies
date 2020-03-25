@@ -26,5 +26,7 @@ public class Movie {
     @Column(name = "VOTE_AVERAGE")
     private String voteAverage;
 
+    //List of genres + List of ProductionCountries
+
 
 }
