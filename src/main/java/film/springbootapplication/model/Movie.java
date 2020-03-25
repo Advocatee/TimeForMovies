@@ -1,30 +1,32 @@
 package film.springbootapplication.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "MOVIE")
+@Table
 public class Movie {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "TITLE")
+    @Column
     private String title;
-    @Column(name = "REALEASE_DATE")
+    @Column
     private Date releaseDate;
-    @Column(name = "RUNTIME")
+    @Column
     private Integer runtime;
-    @Column(name = "VOTE_AVERAGE")
+    @Column
     private String voteAverage;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Genre> genreList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "movie")
+    private List<ProductionCountry> productionCountryList = new ArrayList<>();
 
     //List of genres + List of ProductionCountries
 

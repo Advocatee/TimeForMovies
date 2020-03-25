@@ -1,6 +1,5 @@
 package film.springbootapplication;
 
-import film.springbootapplication.model.Movie;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
