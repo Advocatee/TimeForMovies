@@ -8,9 +8,6 @@ import javax.persistence.*;
 @Entity
 public class ProductionCountry extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long iso;
     @Column
     private String name;
     @Column

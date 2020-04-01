@@ -3,18 +3,13 @@ package film.springbootapplication.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Data
 @Table
 public class Movie extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column
     private String title;
     @Column
@@ -24,9 +19,9 @@ public class Movie extends BaseEntity {
     @Column
     private String voteAverage;
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Genre> genreList = new ArrayList<>();
+    private Set<Genre> genreList = new HashSet<>();
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "movie")
-    private List<ProductionCountry> productionCountryList = new ArrayList<>();
+    private List<ProductionCountry> country = new ArrayList<>();
 
     //List of genres + List of ProductionCountries
 
