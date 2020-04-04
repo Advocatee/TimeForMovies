@@ -1,12 +1,14 @@
 package film.springbootapplication.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class BaseEntity {
 

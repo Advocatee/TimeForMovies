@@ -1,10 +1,12 @@
 package film.springbootapplication.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.*;
 
+@NoArgsConstructor
 @Entity
 @Data
 @Table
