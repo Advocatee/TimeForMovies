@@ -3,6 +3,7 @@ package film.springbootapplication.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 import javax.persistence.*;
 
 @Data
@@ -17,5 +18,7 @@ public class Genre  extends BaseEntity{
     private String dataSource; //записываем откуда пришел этот жанр
     @Column
     private String dataSourceId; //Id под которым он находится в стороннем сервисе
+    @ManyToMany(mappedBy = "genreList")
+    private Movie movie;
 
 }

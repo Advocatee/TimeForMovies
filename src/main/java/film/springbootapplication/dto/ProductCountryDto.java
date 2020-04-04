@@ -1,12 +1,15 @@
 package film.springbootapplication.dto;
 
+import film.springbootapplication.model.Movie;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @Data
-public class UpdateGenreDto {
+@NoArgsConstructor
+public class ProductCountryDto {
+
     private String name;
-    private String dataSource;
+    private String productCountry;
     private String dataSourceId;
+    private Movie movie;
 }
