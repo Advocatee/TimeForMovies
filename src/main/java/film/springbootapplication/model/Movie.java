@@ -25,7 +25,4 @@ public class Movie extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "movie")
     private List<ProductionCountry> country = new ArrayList<>();
 
-    //List of genres + List of ProductionCountries
-
-
 }
