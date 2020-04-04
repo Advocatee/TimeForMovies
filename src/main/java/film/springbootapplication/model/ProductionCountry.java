@@ -17,8 +17,7 @@ public class ProductionCountry extends BaseEntity {
     @Column
     private String dataSourceId; //Id под которым он находится в стороннем сервисе
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MOVIE_ID")
+    @ManyToMany(mappedBy = "country")
     private Movie movie;
 
 }
