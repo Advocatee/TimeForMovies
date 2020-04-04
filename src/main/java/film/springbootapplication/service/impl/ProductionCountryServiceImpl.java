@@ -43,4 +43,9 @@ public class ProductionCountryServiceImpl implements ProductionCountryService {
         return productionCountryRepository.save(productionCountry);
     }
 
+    @Override
+    public ProductionCountry updateProductionById(Long id) {
+        return productionCountryRepository.findByIdAndUpdated(id);
+    }
+
 }

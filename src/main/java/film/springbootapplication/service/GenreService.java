@@ -17,4 +17,6 @@ public interface GenreService {
 
     Genre updateGenre(Genre genre);
 
+    Genre updateById(Long id);
+
 }

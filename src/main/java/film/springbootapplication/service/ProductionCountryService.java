@@ -1,6 +1,5 @@
 package film.springbootapplication.service;
 
-import film.springbootapplication.model.Movie;
 import film.springbootapplication.model.ProductionCountry;
 
 import java.util.List;
@@ -17,5 +16,7 @@ public interface ProductionCountryService {
     ProductionCountry createProductionCountry(ProductionCountry productionCountry);
 
     ProductionCountry updateProductionCountry(ProductionCountry productionCountry);
+
+    ProductionCountry updateProductionById(Long id);
 
 }

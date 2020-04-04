@@ -17,5 +17,7 @@ public interface MovieService {
 
     Movie updateMovie(Movie movie);
 
+    Movie updateById(Long id);
+
 
 }

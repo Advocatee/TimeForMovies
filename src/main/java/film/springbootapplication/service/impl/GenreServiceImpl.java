@@ -43,4 +43,9 @@ public class GenreServiceImpl implements GenreService {
     public Genre updateGenre(Genre genre) {
         return genreRepository.save(genre);
     }
+
+    @Override
+    public Genre updateById(Long id) {
+        return genreRepository.findGenreByIdAndUpdated(id);
+    }
 }

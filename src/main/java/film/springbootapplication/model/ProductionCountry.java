@@ -13,9 +13,9 @@ public class ProductionCountry extends BaseEntity {
     @Column
     private String name;
     @Column
-    private String productCountry; //записываем откуда пришел этот жанр
+    private String productCountry;
     @Column
-    private String dataSourceId; //Id под которым он находится в стороннем сервисе
+    private String dataSourceId;
 
     @ManyToMany(mappedBy = "country")
     private Movie movie;
