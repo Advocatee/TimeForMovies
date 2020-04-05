@@ -1,6 +1,5 @@
 package film.springbootapplication.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,14 +7,18 @@ import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class ProductionCountry {
+public class ProductionCountry extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long iso;
-    @Column(name = "NAME")
+    @Column
     private String name;
+    @Column
+    private String productCountry; //записываем откуда пришел этот жанр
+    @Column
+    private String dataSourceId; //Id под которым он находится в стороннем сервисе
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MOVIE_ID")
+    private Movie movie;
 
 }

@@ -1,30 +1,28 @@
 package film.springbootapplication.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.*;
 
+@NoArgsConstructor
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "MOVIE")
-public class Movie {
+@Table
+public class Movie extends BaseEntity {
 
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "TITLE")
+    @Column
     private String title;
-    @Column(name = "REALEASE_DATE")
+    @Column
     private Date releaseDate;
-    @Column(name = "RUNTIME")
+    @Column
     private Integer runtime;
-    @Column(name = "VOTE_AVERAGE")
+    @Column
     private String voteAverage;
-
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Genre> genreList = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "movie")
+    private List<ProductionCountry> country = new ArrayList<>();
 
 }

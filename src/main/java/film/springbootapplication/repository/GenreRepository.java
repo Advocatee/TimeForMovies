@@ -1,7 +1,9 @@
 package film.springbootapplication.repository;
 
 import film.springbootapplication.model.Genre;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface GenreRepository extends JpaRepository<Genre, Long> {
+public interface GenreRepository extends BaseRepository<Genre> {
+
+    Genre findByIdAndActive(Long id, boolean active);
+
 }
