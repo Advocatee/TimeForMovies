@@ -28,7 +28,17 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public Long delete(Long id) {
+    public List<Genre> getAll() {
+        return genreRepository.findAll();
+    }
+
+    @Override
+    public Optional<Genre> getById(Long id) {
+        return genreRepository.findById(id);
+    }
+
+    @Override
+    public void delete(Long id) {
         //TODO не удалять а помечать active = false и ставить дату в поле updated
         genreRepository.deleteById(id);
         return id;

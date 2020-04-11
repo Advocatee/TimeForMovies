@@ -16,7 +16,6 @@ public class ProductionCountry extends BaseEntity {
     private String productCountry;
     @Column
     private String dataSourceId;
-
     @ManyToMany(mappedBy = "country")
     private Movie movie;
 

@@ -14,16 +14,14 @@ import java.util.Optional;
 @Transactional
 public class ProductionCountryServiceImpl implements ProductionCountryService {
 
-    @Autowired
-    private ProductionCountryRepository productionCountryRepository;
-
 //    @Override
 //    public ProductionCountry updateProductionById(Long id) {
 //        return productionCountryRepository.findById(id)
 //                .orElseThrow(() -> new EntityNotFoundException(String.format("ProductionCountry with ID [%d] not found", id)));
 //    }
 
-    // --------------------------------------------------------------------
+    @Autowired
+    private ProductionCountryRepository productionCountryRepository;
 
     @Override
     public List<ProductionCountry> getAll() {
@@ -36,16 +34,8 @@ public class ProductionCountryServiceImpl implements ProductionCountryService {
     }
 
     @Override
-    public Long delete(Long id) {
-
-        //TODO не удалять а помечать active = false и ставить дату в поле updated
+    public void delete(Long id) {
         productionCountryRepository.deleteById(id);
-        return id;
-    }
-
-    @Override
-    public ProductionCountry create(ProductionCountry productionCountry) {
-        return productionCountryRepository.save(productionCountry);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package film.springbootapplication.controller;
 
+import film.springbootapplication.dto.InfoGenreDto;
 import film.springbootapplication.dto.UpdateGenreDto;
 import film.springbootapplication.model.Genre;
 import film.springbootapplication.service.GenreService;

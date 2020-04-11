@@ -28,11 +28,8 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Long delete(Long id) {
-
-        //TODO не удалять а помечать active = false и ставить дату в поле updated
-        movieRepository.deleteById(id);
-        return id;
+    public void delete(Long id) {
+         movieRepository.deleteById(id);
     }
 
     @Override
