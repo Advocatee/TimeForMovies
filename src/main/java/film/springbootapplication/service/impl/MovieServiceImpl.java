@@ -17,37 +17,31 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
-    @Transactional
     @Override
-    public List<Movie> getAllMovies() {
+    public List<Movie> getAll() {
         return movieRepository.findAll();
     }
 
     @Override
-    public Optional<Movie> getMovieById(Long id) {
+    public Optional<Movie> getById(Long id) {
         return movieRepository.findById(id);
     }
 
     @Override
-    @Transactional
-    public void deleteMovie(Long id) {
+    public Long delete(Long id) {
+
+        //TODO не удалять а помечать active = false и ставить дату в поле updated
         movieRepository.deleteById(id);
+        return id;
     }
 
-    @Transactional
     @Override
-    public Movie createMovie(Movie movie) {
-        return movieRepository.save(movie);
-    }
-
-    @Transactional
-    @Override
-    public Movie updateMovie(Movie movie) {
+    public Movie create(Movie movie) {
         return movieRepository.save(movie);
     }
 
     @Override
-    public Movie updateById(Long id) {
-        return movieRepository.findMovieByIdAndUpdated(id);
+    public Movie update(Movie movie) {
+        return null;
     }
 }

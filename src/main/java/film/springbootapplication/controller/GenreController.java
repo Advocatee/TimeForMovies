@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RestController
@@ -35,14 +34,15 @@ public class GenreController {
 
     @PostMapping()
     public Genre addGenre(@RequestBody UpdateGenreDto dto) {
+
         //TODO Add ModelMapper
 
         Genre g = new Genre();
         g.setDataSource(dto.getDataSource());
         g.setDataSourceId(dto.getDataSourceId());
         g.setName(dto.getName());
+        return service.create(g);
 
-        return genreService.createGenre(g);
     }
 
     @DeleteMapping(value = "/genre/{id}")
@@ -55,11 +55,5 @@ public class GenreController {
     public Genre updateMovie(@RequestBody Genre genre) {
         return genreService.updateGenre(genre);
     }
-
-    @PutMapping("/genreUpdate/{id}")
-    public Genre update(@PathVariable Long id) {
-        return genreService.updateById(id);
-    }
-
 
 }

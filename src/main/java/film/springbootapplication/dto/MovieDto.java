@@ -12,7 +12,6 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 public class MovieDto {
-
     private String title;
     private Date releaseDate;
     private Integer runtime;

@@ -43,10 +43,4 @@ public class MovieController {
         return movieService.updateMovie(movie);
     }
 
-    @PutMapping("/movieUpdate/{id}")
-    public Movie update(@PathVariable Long id) {
-        return movieService.updateById(id);
-    }
-
-
 }

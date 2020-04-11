@@ -1,6 +1,5 @@
 package film.springbootapplication.service.impl;
 
-import film.springbootapplication.model.Movie;
 import film.springbootapplication.model.ProductionCountry;
 import film.springbootapplication.repository.ProductionCountryRepository;
 import film.springbootapplication.service.ProductionCountryService;
@@ -18,34 +17,39 @@ public class ProductionCountryServiceImpl implements ProductionCountryService {
     @Autowired
     private ProductionCountryRepository productionCountryRepository;
 
+//    @Override
+//    public ProductionCountry updateProductionById(Long id) {
+//        return productionCountryRepository.findById(id)
+//                .orElseThrow(() -> new EntityNotFoundException(String.format("ProductionCountry with ID [%d] not found", id)));
+//    }
+
+    // --------------------------------------------------------------------
+
     @Override
-    public List<ProductionCountry> getAllProductionCountry() {
+    public List<ProductionCountry> getAll() {
         return productionCountryRepository.findAll();
     }
 
     @Override
-    public Optional<ProductionCountry> getProductionCountryById(Long id) {
+    public Optional<ProductionCountry> getById(Long id) {
         return productionCountryRepository.findById(id);
     }
 
     @Override
-    public void deleteProductionCountry(Long id) {
+    public Long delete(Long id) {
+
+        //TODO не удалять а помечать active = false и ставить дату в поле updated
         productionCountryRepository.deleteById(id);
+        return id;
     }
 
     @Override
-    public ProductionCountry createProductionCountry(ProductionCountry productionCountry) {
+    public ProductionCountry create(ProductionCountry productionCountry) {
         return productionCountryRepository.save(productionCountry);
     }
 
     @Override
-    public ProductionCountry updateProductionCountry(ProductionCountry productionCountry) {
-        return productionCountryRepository.save(productionCountry);
+    public ProductionCountry update(ProductionCountry productionCountry) {
+        return null;
     }
-
-    @Override
-    public ProductionCountry updateProductionById(Long id) {
-        return productionCountryRepository.findByIdAndUpdated(id);
-    }
-
 }

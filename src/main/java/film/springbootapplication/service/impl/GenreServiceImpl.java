@@ -17,35 +17,31 @@ public class GenreServiceImpl implements GenreService {
     @Autowired
     private GenreRepository genreRepository;
 
-    @Transactional(readOnly = true)
     @Override
-    public List<Genre> getAllGenres() {
+    public List<Genre> getAll() {
         return genreRepository.findAll();
     }
 
-    @Transactional
     @Override
-    public Optional<Genre> getGenreById(Long id) {
+    public Optional<Genre> getById(Long id) {
         return genreRepository.findById(id);
     }
 
     @Override
-    public void deleteGenre(Long id) {
+    public Long delete(Long id) {
+        //TODO не удалять а помечать active = false и ставить дату в поле updated
         genreRepository.deleteById(id);
+        return id;
     }
 
     @Override
-    public Genre createGenre(Genre genre) {
-        return genreRepository.save(genre);
+    public Genre create(Genre object) {
+        return genreRepository.save(object);
     }
 
     @Override
-    public Genre updateGenre(Genre genre) {
-        return genreRepository.save(genre);
+    public Genre update(Genre object) {
+        return null;
     }
 
-    @Override
-    public Genre updateById(Long id) {
-        return genreRepository.findGenreByIdAndUpdated(id);
-    }
 }
