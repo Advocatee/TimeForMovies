@@ -1,46 +1,42 @@
 package film.springbootapplication.controller;
 
-import film.springbootapplication.model.Genre;
 import film.springbootapplication.model.Movie;
 import film.springbootapplication.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
-@RestController(value = "/movie")
+@RestController
 public class MovieController {
 
     @Autowired
     private MovieService movieService;
 
     @GetMapping(value = "/movies")
-    public List<Movie> movieList() {
-        return movieService.getAllMovies();
+    public List<Movie> findMovies() {
+        return movieService.getAll();
     }
 
-    @GetMapping(value = "/{id}")
-    public Movie getById(@PathVariable Long id) {
-        return movieService.getMovieById(id).orElseThrow(() -> new EntityNotFoundException("No Movies with such ID"));
+    @PostMapping(value = "/movies")
+    public Movie createMovie(@RequestBody Movie movie) {
+        return movieService.create(movie);
     }
 
-    @DeleteMapping(value = "/products/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable Long id) {
-        movieService.deleteMovie(id);
+    @DeleteMapping(value = "/movies/{id}")
+    public void removeMovie(@PathVariable Long id) {
+        movieService.delete(id);
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createMovie(@RequestBody Movie movie) {
-        movieService.createMovie(movie);
+    @GetMapping(value = "/movies/{id}")
+    public Movie findMovie(@PathVariable Long id) {
+        return movieService.getById(id).orElseThrow(() -> new EntityNotFoundException("No Movies with such ID"));
     }
 
-    @PutMapping
-    public Movie updateMovie(@RequestBody Movie movie) {
-        return movieService.updateMovie(movie);
+    @PutMapping(value = "/movies/{id}")
+    public Movie updateMovie(@PathVariable Long id) {
+        return movieService.update(null);
     }
 
 }

@@ -39,7 +39,12 @@ public class ProductionCountryServiceImpl implements ProductionCountryService {
     }
 
     @Override
-    public ProductionCountry update(ProductionCountry productionCountry) {
+    public ProductionCountry create(ProductionCountry movie) {
+        return productionCountryRepository.saveAndFlush(movie);
+    }
+
+    @Override
+    public ProductionCountry update(ProductionCountry movie) {
         return null;
     }
 }

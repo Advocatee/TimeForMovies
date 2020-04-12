@@ -28,30 +28,20 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public List<Genre> getAll() {
-        return genreRepository.findAll();
-    }
-
-    @Override
-    public Optional<Genre> getById(Long id) {
-        return genreRepository.findById(id);
-    }
-
-    @Override
     public void delete(Long id) {
         //TODO не удалять а помечать active = false и ставить дату в поле updated
-        genreRepository.deleteById(id);
-        return id;
+
     }
 
     @Override
-    public Genre create(Genre object) {
-        return genreRepository.save(object);
+    public Genre create(Genre movie) {
+        return genreRepository.save(movie);
     }
 
     @Override
-    public Genre update(Genre object) {
+    public Genre update(Genre movie) {
         return null;
     }
+
 
 }

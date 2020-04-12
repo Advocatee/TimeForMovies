@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +18,6 @@ public class ProductionCountry extends BaseEntity {
     @Column
     private String dataSourceId;
     @ManyToMany(mappedBy = "country")
-    private Movie movie;
+    private Set<Movie> movie;
 
 }
