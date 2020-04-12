@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class GenreController extends BaseController<GenreService> {
+public class GenreController extends BaseController {
 
     private final GenreService service;
 
