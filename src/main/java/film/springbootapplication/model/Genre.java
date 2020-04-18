@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
+import java.util.Optional;
 import java.util.Set;
 
 @Data
@@ -21,5 +22,9 @@ public class Genre  extends BaseEntity{
     private String dSId; //Id под которым он находится в стороннем сервисе
     @ManyToMany(mappedBy = "genreList")
     private Set<Movie> movie;
-
+//    private Optional<Genre> id;
+//
+//    public void setId(Optional<Genre> id) {
+//        this.id = id;
+//    }
 }
