@@ -21,7 +21,7 @@ public class GenreController extends BaseController<GenreService> {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping(value = "/genres")
     public List<Genre> findGenres() {
         return service.getAll();
     }

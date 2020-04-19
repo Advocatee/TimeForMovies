@@ -1,6 +1,6 @@
 package film.springbootapplication.repository;
 
-import film.springbootapplication.model.ProductionCountry;
+import film.springbootapplication.model.ProductionCompany;
 
-public interface ProductionCountryRepository extends BaseRepository<ProductionCountry> {
+public interface ProductionCountryRepository extends BaseRepository<ProductionCompany> {
 }

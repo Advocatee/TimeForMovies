@@ -21,10 +21,5 @@ public class Genre  extends BaseEntity{
     @Column
     private String dSId; //Id под которым он находится в стороннем сервисе
     @ManyToMany(mappedBy = "genreList")
-    private Set<Movie> movie;
-//    private Optional<Genre> id;
-//
-//    public void setId(Optional<Genre> id) {
-//        this.id = id;
-//    }
+    private Set<Movie> movies;
 }

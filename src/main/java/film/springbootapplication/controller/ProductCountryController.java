@@ -1,6 +1,6 @@
 package film.springbootapplication.controller;
 
-import film.springbootapplication.model.ProductionCountry;
+import film.springbootapplication.model.ProductionCompany;
 import film.springbootapplication.service.ProductionCountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +15,12 @@ public class ProductCountryController {
     private ProductionCountryService service;
 
     @GetMapping(value = "/countries")
-    public List<ProductionCountry> productionCountryList() {
+    public List<ProductionCompany> productionCountryList() {
         return service.getAll();
     }
 
     @GetMapping(value = "/countries/{id}")
-    public ProductionCountry getById(@PathVariable Long id) {
+    public ProductionCompany getById(@PathVariable Long id) {
         return service.getById(id).orElseThrow(() -> new EntityNotFoundException("No ProductCountry with such ID"));
     }
 
@@ -30,12 +30,12 @@ public class ProductCountryController {
     }
 
     @PostMapping(value = "/countries")
-    public void createProductCountry(@RequestBody ProductionCountry productionCountry) {
-        service.create(productionCountry);
+    public void createProductCountry(@RequestBody ProductionCompany productionCompany) {
+        service.create(productionCompany);
     }
 
     @PutMapping("/countries/{id}")
-    public ProductionCountry update(@PathVariable ProductionCountry id) {
+    public ProductionCompany update(@PathVariable ProductionCompany id) {
         return service.update(id);
     }
 

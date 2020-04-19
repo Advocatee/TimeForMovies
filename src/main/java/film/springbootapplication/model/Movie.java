@@ -20,13 +20,15 @@ public class Movie extends BaseEntity {
     private Integer runtime;
     @Column
     private String voteAverage;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "MOVIE_GENRE", joinColumns = {@JoinColumn(name = "MOVIE_ID")},
     inverseJoinColumns = {@JoinColumn(name = "GENRE_ID")})
     private Set<Genre> genreList = new HashSet<>();
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "MOVIE_ProductionCountry", joinColumns = {@JoinColumn(name = "MOVIE_ID")},
             inverseJoinColumns = {@JoinColumn(name = "ProductionCountry_ID")})
-    private List<ProductionCountry> country = new ArrayList<>();
+    private List<ProductionCompany> country = new ArrayList<>();
 
 }
