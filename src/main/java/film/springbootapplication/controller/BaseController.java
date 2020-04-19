@@ -1,19 +1,14 @@
 package film.springbootapplication.controller;
 
+import film.springbootapplication.mapper.CustomModelMapper;
 import film.springbootapplication.service.BaseService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class BaseController <T extends BaseService> {
 
-//    T service;
-
-//    public BaseController(T service) {
-//        this.service = service;
-//    }
-
     @Autowired
-    private ModelMapper modelMapper;
+    private CustomModelMapper modelMapper;
 
     public ModelMapper getModelMapper() {
         return modelMapper;

@@ -1,7 +1,7 @@
 //package film.springbootapplication.mapper;
 //
 //import film.springbootapplication.dto.InfoGenreDto;
-//import film.springbootapplication.dto.MovieDto;
+//import film.springbootapplication.dto.UpdateMovieDto;
 //import film.springbootapplication.model.Genre;
 //import org.modelmapper.ModelMapper;
 //import org.springframework.beans.factory.annotation.Autowired;

@@ -3,6 +3,7 @@ package film.springbootapplication.mapper.service.Impl;
 
 import film.springbootapplication.dto.InfoGenreDto;
 import film.springbootapplication.dto.InfoProductCompanyDto;
+import film.springbootapplication.mapper.CustomModelMapper;
 import film.springbootapplication.mapper.service.ModelMapperFactory;
 import film.springbootapplication.model.Genre;
 import film.springbootapplication.model.Movie;
@@ -10,6 +11,7 @@ import film.springbootapplication.model.ProductionCompany;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -19,19 +21,19 @@ import java.util.stream.Collectors;
 @Component
 public class ModelMapperFactoryImpl implements ModelMapperFactory {
 
-    private ModelMapper mapper;
+    private CustomModelMapper mapper;
 
     public ModelMapperFactoryImpl() {
     }
 
     @Override
-    public ModelMapper createMapper() {
+    public CustomModelMapper createMapper() {
         return mapper;
     }
 
     @PostConstruct
     public ModelMapper createModelMapper() {
-        mapper = new ModelMapper();
+        mapper = new CustomModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
         mapper.createTypeMap(Genre.class, InfoGenreDto.class)

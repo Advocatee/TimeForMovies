@@ -1,8 +1,8 @@
 package film.springbootapplication.mapper.service;
 
 
-import org.modelmapper.ModelMapper;
+import film.springbootapplication.mapper.CustomModelMapper;
 
 public interface ModelMapperFactory {
-    ModelMapper createMapper();
+    CustomModelMapper createMapper();
 }

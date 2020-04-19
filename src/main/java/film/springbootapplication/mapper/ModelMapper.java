@@ -1,7 +1,7 @@
 //package film.springbootapplication.mapper;
 //
 //import film.springbootapplication.dto.InfoGenreDto;
-//import film.springbootapplication.dto.MovieDto;
+//import film.springbootapplication.dto.UpdateMovieDto;
 //import film.springbootapplication.model.Genre;
 //import film.springbootapplication.model.Movie;
 //import org.modelmapper.ModelMapper;
@@ -16,12 +16,12 @@
 //    @Autowired
 //    private ModelMapper modelMapper;
 //
-//    public Movie toEntity(MovieDto dto) {
+//    public Movie toEntity(UpdateMovieDto dto) {
 //        return Objects.isNull(dto) ? null : modelMapper.map(dto, Movie.class);
 //    }
 //
-//    public MovieDto toDto(MovieDto entity) {
-//        return Objects.isNull(entity) ? null : modelMapper.map(entity, MovieDto.class);
+//    public UpdateMovieDto toDto(UpdateMovieDto entity) {
+//        return Objects.isNull(entity) ? null : modelMapper.map(entity, UpdateMovieDto.class);
 //    }
 //
 ////    public ModelMapper createTypeMap(Class<Genre> genreClass, Class<InfoGenreDto> infoGenreDtoClass) {

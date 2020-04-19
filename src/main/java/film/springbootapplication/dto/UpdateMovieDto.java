@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-public class MovieDto {
+public class UpdateMovieDto {
     private String title;
     private Date releaseDate;
     private Integer runtime;
