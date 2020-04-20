@@ -9,7 +9,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
-public class ProductionCountry extends BaseEntity {
+public class ProductionCompany extends BaseEntity {
 
     @Column
     private String name;
@@ -18,6 +18,6 @@ public class ProductionCountry extends BaseEntity {
     @Column
     private String dataSourceId;
     @ManyToMany(mappedBy = "country")
-    private Set<Movie> movie;
+    private Set<Movie> movies;
 
 }

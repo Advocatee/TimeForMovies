@@ -21,7 +21,7 @@ public class GenreController extends BaseController<GenreService> {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping(value = "/genres")
     public List<Genre> findGenres() {
         return service.getAll();
     }
@@ -39,22 +39,9 @@ public class GenreController extends BaseController<GenreService> {
     @PostMapping("/genres")
     public Genre addGenre(@RequestBody UpdateGenreDto dto) {
 
-        ModelMapper modelMapper = new ModelMapper();
-        InfoGenreDto genreDto = modelMapper.map(dto, InfoGenreDto.class);
+        Genre genre = getModelMapper().map(dto, Genre.class);
 
-//        assert genreDto.getName().equals(dto.getName());
-//        assert genreDto.getId().equals(dto.getDataSourceId());
-//        assert genreDto.getMovies().equals(dto.getDataSource());
-//
-//
-//        //TODO Add ModelMapper
-//        Genre g = new Genre();
-//        g.setDataSource(dto.getDataSource());
-//        g.setDataSourceId(dto.getDataSourceId());
-//        g.setName(dto.getName());
-
-//        return service.create(g);
-        return null;
+        return service.create(genre);
     }
 
     @DeleteMapping(value = "/genres/{id}")

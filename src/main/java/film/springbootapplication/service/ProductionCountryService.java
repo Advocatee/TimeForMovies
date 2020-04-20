@@ -1,7 +1,7 @@
 package film.springbootapplication.service;
 
-import film.springbootapplication.model.ProductionCountry;
+import film.springbootapplication.model.ProductionCompany;
 
-public interface ProductionCountryService extends BaseService<ProductionCountry> {
+public interface ProductionCountryService extends BaseService<ProductionCompany> {
 
 }
