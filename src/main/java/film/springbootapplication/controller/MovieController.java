@@ -1,42 +1,50 @@
 package film.springbootapplication.controller;
 
+import film.springbootapplication.dto.InfoMovieDto;
+import film.springbootapplication.dto.UpdateMovieDto;
 import film.springbootapplication.model.Movie;
 import film.springbootapplication.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-public class MovieController {
+public class MovieController extends BaseController<MovieService> {
+
+    private final MovieService service;
 
     @Autowired
-    private MovieService movieService;
+    public MovieController(MovieService service) {
+        this.service = service;
+    }
 
     @GetMapping(value = "/movies")
     public List<Movie> findMovies() {
-        return movieService.getAll();
+        return service.getAll();
     }
 
     @PostMapping(value = "/movies")
-    public Movie createMovie(@RequestBody Movie movie) {
-        return movieService.create(movie);
+    public Movie createMovie(@RequestBody UpdateMovieDto dto) {
+        Movie movie = getModelMapper().map(dto, Movie.class);
+        return service.create(movie);
     }
 
     @DeleteMapping(value = "/movies/{id}")
     public void removeMovie(@PathVariable Long id) {
-        movieService.delete(id);
+        service.delete(id);
     }
 
     @GetMapping(value = "/movies/{id}")
-    public Movie findMovie(@PathVariable Long id) {
-        return movieService.getById(id).orElseThrow(() -> new EntityNotFoundException("No Movies with such ID"));
+    public InfoMovieDto findMovie(@PathVariable Long id) {
+        Optional<Movie> movie = service.getById(id);
+        return getModelMapper().map(movie, InfoMovieDto.class);
     }
 
     @PutMapping(value = "/movies/{id}")
     public Movie updateMovie(@PathVariable Long id) {
-        return movieService.update(null);
+        return service.update(null);
     }
 
 }

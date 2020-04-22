@@ -2,7 +2,7 @@ package film.springbootapplication.service.impl;
 
 import film.springbootapplication.model.ProductionCompany;
 import film.springbootapplication.repository.ProductionCountryRepository;
-import film.springbootapplication.service.ProductionCountryService;
+import film.springbootapplication.service.ProductionCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,13 +12,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class ProductionCountryServiceImpl implements ProductionCountryService {
-
-//    @Override
-//    public ProductionCompany updateProductionById(Long id) {
-//        return productionCountryRepository.findById(id)
-//                .orElseThrow(() -> new EntityNotFoundException(String.format("ProductionCompany with ID [%d] not found", id)));
-//    }
+public class ProductionCompanyServiceImpl implements ProductionCompanyService {
 
     @Autowired
     private ProductionCountryRepository productionCountryRepository;

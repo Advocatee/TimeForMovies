@@ -14,10 +14,10 @@ public class ProductionCompany extends BaseEntity {
     @Column
     private String name;
     @Column
-    private String productCountry;
+    private String productCompany;
     @Column
     private String dataSourceId;
-    @ManyToMany(mappedBy = "country")
+    @ManyToMany(mappedBy = "company")
     private Set<Movie> movies;
 
 }

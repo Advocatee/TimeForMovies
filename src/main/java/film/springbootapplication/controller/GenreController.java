@@ -4,7 +4,6 @@ import film.springbootapplication.dto.InfoGenreDto;
 import film.springbootapplication.dto.UpdateGenreDto;
 import film.springbootapplication.model.Genre;
 import film.springbootapplication.service.GenreService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +28,6 @@ public class GenreController extends BaseController<GenreService> {
     @GetMapping(value = "/genres/{id}")
     public InfoGenreDto findGenre(@PathVariable Long id) {
 
-//        return genreService.getGenreById(id).orElseThrow(() -> new EntityNotFoundException("No Genre with such ID"));
-
         Optional<Genre> genre = service.getById(id);
 
         return getModelMapper().map(genre, InfoGenreDto.class);
@@ -50,7 +47,10 @@ public class GenreController extends BaseController<GenreService> {
     }
 
     @PutMapping(value = "/genres/{id}")
-    public Genre updateGenre(@PathVariable Genre id) {
-        return service.update(id);
+    public Genre updateGenre(@RequestBody UpdateGenreDto dto) {
+
+        Genre genre = getModelMapper().map(dto, Genre.class);
+
+        return service.update(genre);
     }
 }

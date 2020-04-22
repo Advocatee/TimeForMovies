@@ -1,13 +1,14 @@
 package film.springbootapplication.dto;
 
+import film.springbootapplication.model.Movie;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class InfoProductCompanyDto {
+public class UpdateProductCompanyDto {
+
     private String name;
-    private String productCompany;
     private String dataSourceId;
-    private List<InfoMovieDto> movie;
+    private List<Movie> movies;
 }
