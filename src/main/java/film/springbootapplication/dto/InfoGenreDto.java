@@ -8,5 +8,5 @@ import java.util.List;
 public class InfoGenreDto {
     private String name;
     private Long id;
-    private List<String> movies;
+    private List<InfoMovieDto> movies;
 }

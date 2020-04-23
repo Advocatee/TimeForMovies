@@ -51,7 +51,7 @@ public class ModelMapperFactoryImpl implements ModelMapperFactory {
     }
 
 
-    private Converter<List<Movie>, List<String>> movieToMovieTitleConverter = ctx -> ctx.getSource().stream().map(Movie::getTitle).collect(Collectors.toList());
+    private Converter<Set<Movie>, List<InfoMovieDto>> movieToMovieTitleConverter = ctx -> ctx.getSource().stream().map(Movie::getTitle).collect(Collectors.toList());
 
     private Converter<Set<Genre>, List<Genre>> genreListToGenreListConverter = ctx -> ctx.getSource().stream().map(Movie::getTitle).collect(Collectors.toList());
 
