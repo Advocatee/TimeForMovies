@@ -9,5 +9,6 @@ import java.util.List;
 public class UpdateProductCompanyDto extends BaseDto {
 
     private String dataSourceId;
-    private List<Movie> movies;
+    private String name;
+    private String country;
 }

@@ -12,9 +12,11 @@ import java.util.Set;
 public class ProductionCompany extends BaseSettingEntity {
 
     @Column
-    private String productCompany;
+    private String name;
     @Column
     private String dataSourceId;
+    @Column
+    private String country;
     @ManyToMany(mappedBy = "company")
     private Set<Movie> movies;
 }
