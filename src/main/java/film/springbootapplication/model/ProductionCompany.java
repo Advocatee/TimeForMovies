@@ -9,15 +9,12 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
-public class ProductionCompany extends BaseEntity {
+public class ProductionCompany extends BaseSettingEntity {
 
-    @Column
-    private String name;
     @Column
     private String productCompany;
     @Column
     private String dataSourceId;
     @ManyToMany(mappedBy = "company")
     private Set<Movie> movies;
-
 }

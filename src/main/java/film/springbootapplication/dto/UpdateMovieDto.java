@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-public class UpdateMovieDto {
-    private String title;
+public class UpdateMovieDto extends BaseDto {
+
     private Date releaseDate;
     private Integer runtime;
     private String voteAverage;

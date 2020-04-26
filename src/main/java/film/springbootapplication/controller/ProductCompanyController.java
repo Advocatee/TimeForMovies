@@ -39,10 +39,7 @@ public class ProductCompanyController extends BaseController<ProductionCompanySe
     }
 
     @PostMapping(value = "/companies")
-    public void createProductCompany(@RequestBody InfoProductCompanyDto dto) {
-
-        ProductionCompany company = getModelMapper().map(dto, ProductionCompany.class);
-
+    public void createProductCompany(@RequestBody ProductionCompany company) {
         service.create(company);
     }
 

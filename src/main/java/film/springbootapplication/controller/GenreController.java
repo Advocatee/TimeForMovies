@@ -4,6 +4,8 @@ import film.springbootapplication.dto.InfoGenreDto;
 import film.springbootapplication.dto.UpdateGenreDto;
 import film.springbootapplication.model.Genre;
 import film.springbootapplication.service.GenreService;
+import film.springbootapplication.validator.ControllerMethodValidate;
+import film.springbootapplication.validator.Impl.ControllerMethodValidateImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,17 +29,12 @@ public class GenreController extends BaseController<GenreService> {
 
     @GetMapping(value = "/genres/{id}")
     public InfoGenreDto findGenre(@PathVariable Long id) {
-
         Optional<Genre> genre = service.getById(id);
-
         return getModelMapper().map(genre, InfoGenreDto.class);
     }
 
     @PostMapping("/genres")
-    public Genre addGenre(@RequestBody UpdateGenreDto dto) {
-
-        Genre genre = getModelMapper().map(dto, Genre.class);
-
+    public Genre addGenre(@RequestBody Genre genre) {
         return service.create(genre);
     }
 
@@ -47,10 +44,7 @@ public class GenreController extends BaseController<GenreService> {
     }
 
     @PutMapping(value = "/genres/{id}")
-    public Genre updateGenre(@RequestBody UpdateGenreDto dto) {
-
-        Genre genre = getModelMapper().map(dto, Genre.class);
-
+    public Genre updateGenre(@RequestBody Genre genre) {
         return service.update(genre);
     }
 }

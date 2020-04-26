@@ -6,9 +6,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class UpdateProductCompanyDto {
+public class UpdateProductCompanyDto extends BaseDto {
 
-    private String name;
     private String dataSourceId;
     private List<Movie> movies;
 }

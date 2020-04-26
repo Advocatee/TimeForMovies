@@ -6,9 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class InfoMovieDto {
+public class InfoMovieDto extends BaseDto {
 
-    private String title;
-    private Long id;
     private List<Genre> genreList;
 }

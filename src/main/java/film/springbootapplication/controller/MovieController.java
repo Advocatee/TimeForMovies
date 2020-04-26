@@ -26,8 +26,7 @@ public class MovieController extends BaseController<MovieService> {
     }
 
     @PostMapping(value = "/movies")
-    public Movie createMovie(@RequestBody UpdateMovieDto dto) {
-        Movie movie = getModelMapper().map(dto, Movie.class);
+    public Movie createMovie(@RequestBody Movie movie) {
         return service.create(movie);
     }
 
