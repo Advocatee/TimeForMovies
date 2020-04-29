@@ -17,6 +17,6 @@ public class ProductionCompany extends BaseSettingEntity {
     private String dataSourceId;
     @Column
     private String country;
-    @ManyToMany(mappedBy = "company")
+    @ManyToMany(mappedBy = "country")
     private Set<Movie> movies;
 }

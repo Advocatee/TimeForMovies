@@ -1,10 +1,10 @@
 package film.springbootapplication.controller;
 
 import film.springbootapplication.dto.InfoProductCompanyDto;
-import film.springbootapplication.dto.UpdateProductCompanyDto;
-import film.springbootapplication.model.Genre;
+import film.springbootapplication.dto.UpdateProductionCompanyDto;
 import film.springbootapplication.model.ProductionCompany;
 import film.springbootapplication.service.ProductionCompanyService;
+import film.springbootapplication.validator.ProductionCompanyValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,7 +44,8 @@ public class ProductCompanyController extends BaseController<ProductionCompanySe
     }
 
     @PutMapping("/companies/{id}")
-    public ProductionCompany update(@PathVariable UpdateProductCompanyDto dto) {
+    public ProductionCompany update(@PathVariable UpdateProductionCompanyDto dto) {
+        validate(dto, new ProductionCompanyValidator());
         ProductionCompany company = getModelMapper().map(dto, ProductionCompany.class);
         return service.update(company);
     }

@@ -44,9 +44,6 @@ public class ModelMapperFactoryImpl implements ModelMapperFactory {
         mapper.createTypeMap(Movie.class, InfoMovieDto.class)
                 .addMappings(mapping -> mapping.using(genreListToGenreListConverter).map(Movie::getGenreList, InfoMovieDto::setGenreList));
 
-        mapper.createTypeMap(ProductionCompany.class, UpdateProductCompanyDto.class)
-                .addMappings(mapping -> mapping.using(movieToMovieListConverter).map(ProductionCompany::getMovies, UpdateProductCompanyDto::setMovies));
-
         return mapper;
     }
 
@@ -54,7 +51,5 @@ public class ModelMapperFactoryImpl implements ModelMapperFactory {
     private Converter<Set<Movie>, List<String>> movieToMovieTitleConverter = ctx -> ctx.getSource().stream().map(Movie::getName).collect(Collectors.toList());
 
     private Converter<Set<Genre>, List<String>> genreListToGenreListConverter = ctx -> ctx.getSource().stream().map(Genre::getName).collect(Collectors.toList());
-
-    private Converter<Set<Movie>, List<String>> movieToMovieListConverter = ctx -> ctx.getSource().stream().map(Movie::getName).collect(Collectors.toList());
 
 }

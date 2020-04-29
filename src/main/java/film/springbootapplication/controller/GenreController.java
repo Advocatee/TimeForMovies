@@ -33,8 +33,9 @@ public class GenreController extends BaseController<GenreService> {
     }
 
     @PostMapping("/genres")
-    public Genre addGenre(@RequestBody Genre genre) {
-        return service.create(genre);
+    public Genre addGenre(@RequestBody UpdateGenreDto genre) {
+        Genre createGenre = getModelMapper().map(genre, Genre.class);
+        return service.create(createGenre);
     }
 
     @DeleteMapping(value = "/genres/{id}")
@@ -46,7 +47,7 @@ public class GenreController extends BaseController<GenreService> {
     public Genre updateGenre(@RequestBody UpdateGenreDto genre) {
         validate(genre, new GenreValidator());
 
-        //        return service.update(genre);
+//                return service.update(genre);
         return null;
     }
 }

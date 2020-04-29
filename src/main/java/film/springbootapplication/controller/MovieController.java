@@ -3,7 +3,10 @@ package film.springbootapplication.controller;
 import film.springbootapplication.dto.InfoMovieDto;
 import film.springbootapplication.dto.UpdateMovieDto;
 import film.springbootapplication.model.Movie;
+import film.springbootapplication.model.ProductionCompany;
 import film.springbootapplication.service.MovieService;
+import film.springbootapplication.validator.GenreValidator;
+import film.springbootapplication.validator.MovieValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +29,9 @@ public class MovieController extends BaseController<MovieService> {
     }
 
     @PostMapping(value = "/movies")
-    public Movie createMovie(@RequestBody Movie movie) {
-        return service.create(movie);
+    public Movie createMovie(@RequestBody UpdateMovieDto movie) {
+        Movie createMovie = getModelMapper().map(movie, Movie.class);
+        return service.create(createMovie);
     }
 
     @DeleteMapping(value = "/movies/{id}")
@@ -42,8 +46,11 @@ public class MovieController extends BaseController<MovieService> {
     }
 
     @PutMapping(value = "/movies/{id}")
-    public Movie updateMovie(@PathVariable Long id) {
-        return service.update(null);
+    public Movie updateMovie(@PathVariable UpdateMovieDto movieDto) {
+        validate(movieDto, new MovieValidator());
+        Movie movie = getModelMapper().map(movieDto, Movie.class);
+//        return service.update(movie);
+        return null;
     }
 
 }

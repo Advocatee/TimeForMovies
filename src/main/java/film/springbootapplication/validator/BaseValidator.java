@@ -1,10 +1,12 @@
 package film.springbootapplication.validator;
 
 import film.springbootapplication.dto.BaseDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+@Slf4j
 public class BaseValidator <T extends BaseDto> implements Validator {
 
     private Class<T> clazz;
@@ -13,7 +15,7 @@ public class BaseValidator <T extends BaseDto> implements Validator {
         this.clazz = (Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), BaseValidator.class);
     }
 
-    @Override
+    @Override   // Будет вызываться автоматически, при создании
     public boolean supports(Class<?> aClass) {
         return aClass.isAssignableFrom(clazz);
     }

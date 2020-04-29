@@ -28,6 +28,6 @@ public class Movie extends BaseSettingEntity {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "MOVIE_ProductionCountry", joinColumns = {@JoinColumn(name = "MOVIE_ID")},
             inverseJoinColumns = {@JoinColumn(name = "ProductionCountry_ID")})
-    private List<ProductionCompany> company = new ArrayList<>();
+    private List<ProductionCompany> country = new ArrayList<>();
 
 }
