@@ -1,8 +1,10 @@
 package film.springbootapplication.validator;
 
 import film.springbootapplication.dto.UpdateGenreDto;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
+@Component
 public class GenreValidator extends BaseValidator<UpdateGenreDto> {
 
     @Override

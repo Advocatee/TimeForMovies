@@ -15,10 +15,12 @@ import java.util.Optional;
 public class GenreController extends BaseController<GenreService> {
 
     private final GenreService service;
+    private final GenreValidator genreValidator;
 
     @Autowired
-    public GenreController(GenreService service) {
+    public GenreController(GenreService service, GenreValidator genreValidator) {
         this.service = service;
+        this.genreValidator = genreValidator;
     }
 
     @GetMapping(value = "/genres")
@@ -33,9 +35,10 @@ public class GenreController extends BaseController<GenreService> {
     }
 
     @PostMapping("/genres")
-    public Genre addGenre(@RequestBody UpdateGenreDto genre) {
-        Genre createGenre = getModelMapper().map(genre, Genre.class);
-        return service.create(createGenre);
+    public InfoGenreDto addGenre(@RequestBody UpdateGenreDto dto) {
+        validate(dto, genreValidator);
+        Genre genre = getModelMapper().map(dto, Genre.class);
+        return getModelMapper().map(service.create(genre), InfoGenreDto.class);
     }
 
     @DeleteMapping(value = "/genres/{id}")
@@ -45,7 +48,7 @@ public class GenreController extends BaseController<GenreService> {
 
     @PutMapping(value = "/genres/{id}")
     public Genre updateGenre(@RequestBody UpdateGenreDto genre) {
-        validate(genre, new GenreValidator());
+        validate(genre, genreValidator);
 
 //                return service.update(genre);
         return null;

@@ -30,7 +30,7 @@ public class BaseController<T extends BaseService> {
 
     private void checkBindingResult(BindingResult result){
 //        if (result.hasErrors()){
-//            throw new Exception();
+//            throw new MyPersonalTestrainingException();
 //        }
     }
 }

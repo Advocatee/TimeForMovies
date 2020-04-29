@@ -1,7 +1,5 @@
 package film.springbootapplication.dto;
 
-import film.springbootapplication.model.Genre;
-import film.springbootapplication.model.ProductionCompany;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,6 +12,6 @@ public class UpdateMovieDto extends BaseDto {
     private Date releaseDate;
     private Integer runtime;
     private String voteAverage;
-    private Set<Genre> genreList;
-    private List<ProductionCompany> country;
+    private Set<String> genreList;
+    private List<String> country;
 }

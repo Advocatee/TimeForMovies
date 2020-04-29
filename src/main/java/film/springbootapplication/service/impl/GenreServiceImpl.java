@@ -29,8 +29,10 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public void delete(Long id) {
+        Genre activeGenre = genreRepository.findByIdAndActive(id, true);
+        activeGenre.setActive(false);
+        genreRepository.save(activeGenre);
         //TODO не удалять а помечать active = false и ставить дату в поле updated
-
     }
 
     @Override
