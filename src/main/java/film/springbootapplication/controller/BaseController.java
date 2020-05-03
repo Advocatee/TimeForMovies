@@ -4,16 +4,19 @@ import film.springbootapplication.dto.BaseDto;
 import film.springbootapplication.mapper.CustomModelMapper;
 import film.springbootapplication.service.BaseService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 public class BaseController<T extends BaseService> {
 
     @Autowired
     private CustomModelMapper modelMapper;
+
+    @Autowired
+    private BaseExceptionHandler baseExceptionHandler;
 
     public ModelMapper getModelMapper() {
         return modelMapper;
@@ -29,8 +32,8 @@ public class BaseController<T extends BaseService> {
     }
 
     private void checkBindingResult(BindingResult result){
-//        if (result.hasErrors()){
-//            throw new MyPersonalTestrainingException();
-//        }
+        if (result.hasErrors()){
+            throw new  baseExceptionHandler.CustomException(result);
+        }
     }
 }

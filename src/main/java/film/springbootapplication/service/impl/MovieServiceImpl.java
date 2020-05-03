@@ -28,8 +28,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public void delete(Long id) {
-         movieRepository.deleteById(id);
+    public Long delete(Long id) {
+        Movie activeMovie = movieRepository.findByIdAndActive(id, true);
+        activeMovie.setActive(false);
+        movieRepository.save(activeMovie);
+        return activeMovie.getId();
     }
 
     @Override
@@ -39,6 +42,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie update(Movie movie) {
-        return null;
+        return movieRepository.saveAndFlush(movie);
     }
 }

@@ -1,5 +1,6 @@
 package film.springbootapplication.service.impl;
 
+
 import film.springbootapplication.model.ProductionCompany;
 import film.springbootapplication.repository.ProductionCountryRepository;
 import film.springbootapplication.service.ProductionCompanyService;
@@ -28,17 +29,25 @@ public class ProductionCompanyServiceImpl implements ProductionCompanyService {
     }
 
     @Override
-    public void delete(Long id) {
-        productionCountryRepository.deleteById(id);
+    public Long delete(Long id) {
+        ProductionCompany activeProductCompany = productionCountryRepository.findByIdAndActive(id, true);
+        activeProductCompany.setActive(false);
+        productionCountryRepository.save(activeProductCompany);
+        return activeProductCompany.getId();
     }
 
     @Override
-    public ProductionCompany create(ProductionCompany movie) {
-        return productionCountryRepository.saveAndFlush(movie);
+    public ProductionCompany create(ProductionCompany productionCompany) {
+        return productionCountryRepository.save(productionCompany);
     }
 
     @Override
-    public ProductionCompany update(ProductionCompany movie) {
-        return null;
+    public ProductionCompany update(ProductionCompany productionCompany) {
+        return productionCountryRepository.saveAndFlush(productionCompany);
+    }
+
+    @Override
+    public Optional<ProductionCompany> findByCompany(String it) {
+        return Optional.empty();
     }
 }

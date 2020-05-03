@@ -15,6 +15,7 @@ import java.util.Optional;
 public class MovieController extends BaseController<MovieService> {
 
     private final MovieService service;
+
     private final MovieValidator movieValidator;
 
     @Autowired
@@ -50,8 +51,7 @@ public class MovieController extends BaseController<MovieService> {
     public Movie updateMovie(@PathVariable UpdateMovieDto movieDto) {
         validate(movieDto, new MovieValidator());
         Movie movie = getModelMapper().map(movieDto, Movie.class);
-//        return service.update(movie);
-        return null;
+        return service.update(movie);
     }
 
 }

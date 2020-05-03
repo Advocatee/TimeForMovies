@@ -10,7 +10,7 @@ public interface BaseService<T extends BaseEntity> {
 
     Optional<T> getById(Long id);
 
-    void delete(Long id);
+    Long delete(Long id);
 
     T create(T movie);
 

@@ -1,8 +1,10 @@
 package film.springbootapplication.validator;
 
 import film.springbootapplication.dto.UpdateProductionCompanyDto;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
+@Component
 public class ProductionCompanyValidator extends BaseValidator<UpdateProductionCompanyDto> {
 
     @Override

@@ -47,10 +47,9 @@ public class GenreController extends BaseController<GenreService> {
     }
 
     @PutMapping(value = "/genres/{id}")
-    public Genre updateGenre(@RequestBody UpdateGenreDto genre) {
-        validate(genre, genreValidator);
-
-//                return service.update(genre);
-        return null;
+    public Genre updateGenre(@RequestBody UpdateGenreDto dto) {
+        validate(dto, genreValidator);
+        Genre genre = getModelMapper().map(dto, Genre.class);
+        return service.update(genre);
     }
 }

@@ -15,11 +15,13 @@ import java.util.Optional;
 public class ProductCompanyController extends BaseController<ProductionCompanyService> {
 
 
-    private ProductionCompanyService service;
+    private final ProductionCompanyService service;
+    private final ProductionCompanyValidator productionCompanyValidator;
 
     @Autowired
-    public ProductCompanyController(ProductionCompanyService service) {
+    public ProductCompanyController(ProductionCompanyService service, ProductionCompanyValidator productionCompanyValidator) {
         this.service = service;
+        this.productionCompanyValidator = productionCompanyValidator;
     }
 
     @GetMapping(value = "/companies")
@@ -39,8 +41,10 @@ public class ProductCompanyController extends BaseController<ProductionCompanySe
     }
 
     @PostMapping(value = "/companies")
-    public void createProductCompany(@RequestBody ProductionCompany company) {
-        service.create(company);
+    public InfoProductCompanyDto createProductCompany(@RequestBody UpdateProductionCompanyDto dto) {
+        validate(dto, productionCompanyValidator);
+        ProductionCompany productionCompany = getModelMapper().map(dto, ProductionCompany.class);
+        return getModelMapper().map(service.create(productionCompany), InfoProductCompanyDto.class);
     }
 
     @PutMapping("/companies/{id}")
