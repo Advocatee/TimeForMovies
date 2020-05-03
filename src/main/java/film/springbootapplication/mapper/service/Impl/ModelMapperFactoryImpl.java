@@ -16,9 +16,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityExistsException;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -45,8 +43,8 @@ public class ModelMapperFactoryImpl implements ModelMapperFactory {
         mapper = new CustomModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
-        mapper.createTypeMap(Genre.class, InfoGenreDto.class)
-                .addMappings(mapping -> mapping.using(movieToMovieTitleConverter).map(Genre::getMovies, InfoGenreDto::setMovies));
+//        mapper.createTypeMap(Genre.class, InfoGenreDto.class)
+//                .addMappings(mapping -> mapping.using(movieToMovieTitleConverter).map(Genre::getMovies, InfoGenreDto::setMovies));
 
         mapper.createTypeMap(ProductionCompany.class, InfoProductCompanyDto.class)
                 .addMappings(mapping -> mapping.using(movieToMovieTitleConverter).map(ProductionCompany::getMovies, InfoProductCompanyDto::setMovie));
@@ -61,7 +59,9 @@ public class ModelMapperFactoryImpl implements ModelMapperFactory {
         return mapper;
     }
 
-    private Converter<Set<Movie>, List<String>> movieToMovieTitleConverter = ctx -> ctx.getSource().stream().map(Movie::getName).collect(Collectors.toList());
+    private Converter<Set<Movie>, List<String>> movieToMovieTitleConverter = ctx -> Objects.nonNull(ctx.getSource()) && ctx.getSource().isEmpty()
+            ? ctx.getSource().stream().map(Movie::getName).collect(Collectors.toList())
+            : new ArrayList<>();
 
     private Converter<Set<Genre>, List<String>> genreListToGenreListConverter = ctx -> ctx.getSource().stream().map(Genre::getName).collect(Collectors.toList());
 
