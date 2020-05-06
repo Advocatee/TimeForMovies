@@ -29,4 +29,6 @@ public class BaseValidator <T extends BaseDto> implements Validator {
     protected void commonValidate(T target, Errors errors) {
 
     }
+
+
 }

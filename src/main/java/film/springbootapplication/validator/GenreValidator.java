@@ -12,8 +12,11 @@ public class GenreValidator extends BaseValidator<UpdateGenreDto> {
         if(target.getName().isEmpty()) {
             errors.rejectValue("name", "Name could not be empty :" + target.getName());
         }
-//        if (target.getId() == null || target.getId() < 0) {
-//            errors.reject("id", "Id could not be empty and must be > 0 ");
-//        }
+        if (target.getDataSourceId().isEmpty()) {
+            errors.rejectValue("dataSourceId","DataSourceId couldn't be empty" + target.getDataSourceId());
+        }
+        if (target.getDataSource().isEmpty()) {
+            errors.rejectValue("dataSource","DataSource couldn't be empty" + target.getDataSource());
+        }
     }
 }

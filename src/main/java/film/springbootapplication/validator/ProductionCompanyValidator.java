@@ -12,8 +12,8 @@ public class ProductionCompanyValidator extends BaseValidator<UpdateProductionCo
         if (target.getName().isEmpty()) {
             errors.rejectValue("name", "Name could not be empty :" + target.getName());
         }
-        if (target.getId() == null || target.getId() < 0) {
-            errors.reject("id", "Id could not be empty and must be > 0 ");
+        if (target.getCountry().isEmpty()) {
+            errors.rejectValue("country", "Country should't be empty");
         }
     }
 }

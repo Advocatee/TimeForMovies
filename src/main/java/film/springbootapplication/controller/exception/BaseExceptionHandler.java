@@ -1,7 +1,5 @@
 package film.springbootapplication.controller.exception;
 
-import film.springbootapplication.controller.exception.ApiError;
-import film.springbootapplication.controller.exception.AppControllerException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +18,7 @@ import java.util.stream.Collectors;
 public class BaseExceptionHandler extends RuntimeException {
 
     @ExceptionHandler(AppControllerException.class)
-    public ResponseEntity<?> handleIAEXception(AppControllerException ex) {
+    public ResponseEntity<?> handleIAException(AppControllerException ex) {
         return Objects.nonNull(ex.getBindingResult())
                 ? ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(convertToCommon(ex.getBindingResult()))
                 : ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(convertToCommon(ex.getMessage()));

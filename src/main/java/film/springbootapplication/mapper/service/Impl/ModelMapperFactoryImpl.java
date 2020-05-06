@@ -43,9 +43,6 @@ public class ModelMapperFactoryImpl implements ModelMapperFactory {
         mapper = new CustomModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
-//        mapper.createTypeMap(Genre.class, InfoGenreDto.class)
-//                .addMappings(mapping -> mapping.using(movieToMovieTitleConverter).map(Genre::getMovies, InfoGenreDto::setMovies));
-
         mapper.createTypeMap(ProductionCompany.class, InfoProductCompanyDto.class)
                 .addMappings(mapping -> mapping.using(movieToMovieTitleConverter).map(ProductionCompany::getMovies, InfoProductCompanyDto::setMovie));
 
@@ -55,6 +52,7 @@ public class ModelMapperFactoryImpl implements ModelMapperFactory {
         mapper.createTypeMap(UpdateMovieDto.class, Movie.class)
                 .addMappings(mapping -> mapping.using(productCompanyNameToProductCompanyConverter).map(UpdateMovieDto::getCountry, Movie::setCountry))
                 .addMappings(mapping -> mapping.using(genreNameToGenreConverter).map(UpdateMovieDto::getGenreList, Movie::setGenreList));
+
 
         return mapper;
     }

@@ -30,10 +30,10 @@ public class MovieController extends BaseController<MovieService> {
     }
 
     @PostMapping(value = "/movies")
-    public Movie createMovie(@RequestBody UpdateMovieDto dto) {
+    public InfoMovieDto createMovie(@RequestBody UpdateMovieDto dto) {
         validate(dto, movieValidator);
         Movie createMovie = getModelMapper().map(dto, Movie.class);
-        return service.create(createMovie);
+       return getModelMapper().map(service.create(createMovie), InfoMovieDto.class);
     }
 
     @DeleteMapping(value = "/movies/{id}")
