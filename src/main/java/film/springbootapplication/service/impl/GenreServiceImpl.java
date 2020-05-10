@@ -38,8 +38,14 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public Long delete(Long id) {
         Genre activeGenre = genreRepository.findByIdAndActive(id, true);
-        activeGenre.setActive(false);
-        genreRepository.save(activeGenre);
+        try{
+            activeGenre.setActive(false);
+            genreRepository.save(activeGenre);
+
+        } catch (NullPointerException e){
+            Genre genre = genreRepository.findGenreById(id);
+            genreRepository.delete(genre);
+        }
         return activeGenre.getId();
     }
 

@@ -14,4 +14,7 @@ public interface GenreRepository extends BaseRepository<Genre> {
     Genre findGenreById(Long id, Date updated);
 
 //    Optional<Genre> findByName(String name);
+
+    Genre findGenreById(Long id);
+
 }
