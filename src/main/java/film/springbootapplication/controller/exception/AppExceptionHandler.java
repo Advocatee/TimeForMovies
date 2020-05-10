@@ -1,11 +1,13 @@
 package film.springbootapplication.controller.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +17,16 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @ControllerAdvice
-public class BaseExceptionHandler extends RuntimeException {
+public class AppExceptionHandler extends RuntimeException {
+
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity<?> defaultHandlerException(Exception ex) throws Exception {
+        log.error(String.valueOf(ex));
+        if (AnnotationUtils.findAnnotation(ex.getClass(), ResponseStatus.class) != null) {
+            throw ex;
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+    }
 
     @ExceptionHandler(AppControllerException.class)
     public ResponseEntity<?> handleIAException(AppControllerException ex) {

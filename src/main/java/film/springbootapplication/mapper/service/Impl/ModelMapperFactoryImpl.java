@@ -53,22 +53,26 @@ public class ModelMapperFactoryImpl implements ModelMapperFactory {
                 .addMappings(mapping -> mapping.using(productCompanyNameToProductCompanyConverter).map(UpdateMovieDto::getCountry, Movie::setCountry))
                 .addMappings(mapping -> mapping.using(genreNameToGenreConverter).map(UpdateMovieDto::getGenreList, Movie::setGenreList));
 
-
         return mapper;
     }
 
-    private Converter<Set<Movie>, List<String>> movieToMovieTitleConverter = ctx -> Objects.nonNull(ctx.getSource()) && ctx.getSource().isEmpty()
+    private final Converter<Set<Movie>, List<String>> movieToMovieTitleConverter = ctx -> Objects.nonNull(ctx.getSource()) && ctx.getSource().isEmpty()
             ? ctx.getSource().stream().map(Movie::getName).collect(Collectors.toList())
             : new ArrayList<>();
 
-    private Converter<Set<Genre>, List<String>> genreListToGenreListConverter = ctx -> ctx.getSource().stream().map(Genre::getName).collect(Collectors.toList());
+    private final Converter<Set<Genre>, List<String>> genreListToGenreListConverter = ctx -> ctx.getSource().stream().map(Genre::getName).collect(Collectors.toList());
 
-    private Converter<Set<String>, Set<Genre>> genreNameToGenreConverter = ctx -> ctx.getSource().parallelStream().map(it -> {
-        Optional<Genre> found = genreService.findByName(it);
-        return found.orElseThrow(EntityExistsException::new);
+    private final Converter<Set<String>, Set<Genre>> genreNameToGenreConverter = ctx -> ctx.getSource().parallelStream().map(it -> {
+        Genre found = genreService.findByName(it);
+        if (found == null) {
+            throw new EntityExistsException();
+        } else
+            return found;
+//        Optional<Genre> genre = genreService.findByName(it);
+//        return genre.orElseThrow(EntityNotFoundException::new);
     }).collect(Collectors.toSet());
 
-    private Converter<List<String>, List<ProductionCompany>> productCompanyNameToProductCompanyConverter = ctx -> ctx.getSource().parallelStream().map(it ->
+    private final Converter<List<String>, List<ProductionCompany>> productCompanyNameToProductCompanyConverter = ctx -> ctx.getSource().parallelStream().map(it ->
     {
         Optional<ProductionCompany> found = productionCompanyService.findByCompany(it);
         return found.orElseThrow(EntityExistsException::new);
