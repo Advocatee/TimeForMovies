@@ -1,6 +1,7 @@
 package film.springbootapplication.service.impl;
 
 
+import film.springbootapplication.model.Genre;
 import film.springbootapplication.model.ProductionCompany;
 import film.springbootapplication.repository.ProductionCountryRepository;
 import film.springbootapplication.service.ProductionCompanyService;

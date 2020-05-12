@@ -8,6 +8,8 @@ import film.springbootapplication.validator.GenreValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,12 +27,13 @@ public class GenreController extends BaseController<GenreService> {
 
     @GetMapping(value = "/genres")
     public List<Genre> findGenres() {
-        return service.getAll();
+//        return service.getAll();
+        return Collections.singletonList(service.findByActive());
     }
 
     @GetMapping(value = "/genres/{id}")
     public InfoGenreDto findGenre(@PathVariable Long id) {
-        Optional<Genre> genre = service.getById(id);
+        Genre genre = service.getById(id).orElseThrow(EntityNotFoundException::new);
         return getModelMapper().map(genre, InfoGenreDto.class);
     }
 
@@ -47,7 +50,8 @@ public class GenreController extends BaseController<GenreService> {
     }
 
     @PutMapping(value = "/genres/{id}")
-    public Genre updateGenre(@RequestBody UpdateGenreDto dto) {
+    public Genre updateGenre(@RequestBody UpdateGenreDto dto, @PathVariable Long id) {
+        dto.setId(id);
         validate(dto, genreValidator);
         Genre genre = getModelMapper().map(dto, Genre.class);
         return service.update(genre);

@@ -3,8 +3,6 @@ package film.springbootapplication.service.impl;
 import film.springbootapplication.model.Genre;
 import film.springbootapplication.repository.GenreRepository;
 import film.springbootapplication.service.GenreService;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,12 +13,6 @@ import java.util.Optional;
 @Service
 @Transactional
 public class GenreServiceImpl implements GenreService {
-
-    private SessionFactory sessionFactory;
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
     @Autowired
     private GenreRepository genreRepository;
@@ -38,14 +30,8 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public Long delete(Long id) {
         Genre activeGenre = genreRepository.findByIdAndActive(id, true);
-        try{
             activeGenre.setActive(false);
             genreRepository.save(activeGenre);
-
-        } catch (NullPointerException e){
-            Genre genre = genreRepository.findGenreById(id);
-            genreRepository.delete(genre);
-        }
         return activeGenre.getId();
     }
 
@@ -57,9 +43,7 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public Genre update(Genre genre) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.update(genre);
-        return genre;
+        return genreRepository.save(genre);
     }
 
 
@@ -67,5 +51,10 @@ public class GenreServiceImpl implements GenreService {
     public Genre findByName(String genreName) {
 //        return genreRepository.findByName(genreName);
         return null;
+    }
+
+    @Override
+    public Genre findByActive() {
+        return genreRepository.findByActive();
     }
 }

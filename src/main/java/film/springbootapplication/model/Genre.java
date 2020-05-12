@@ -5,13 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
 @Entity
 @NoArgsConstructor
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"dataSource", "dataSourceId"}))
-public class Genre  extends BaseSettingEntity{
+public  class Genre  extends BaseSettingEntity  {
 
     @Column
     private String dataSource; //записываем откуда пришел этот жанр

@@ -20,7 +20,7 @@ public abstract class BaseEntity {
     @Column
     private Date updated;
     @Column
-    private Boolean active;
+    private Boolean active = true;
     @PrePersist
     public void preSave() {
         created = new Date();
