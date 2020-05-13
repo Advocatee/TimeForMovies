@@ -1,12 +1,9 @@
 package film.springbootapplication.service.impl;
 
 
-import film.springbootapplication.model.Genre;
 import film.springbootapplication.model.ProductionCompany;
 import film.springbootapplication.repository.ProductionCountryRepository;
 import film.springbootapplication.service.ProductionCompanyService;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,12 +14,6 @@ import java.util.Optional;
 @Service
 @Transactional
 public class ProductionCompanyServiceImpl implements ProductionCompanyService {
-
-    private SessionFactory sessionFactory;
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
     @Autowired
     private ProductionCountryRepository productionCountryRepository;
@@ -52,15 +43,16 @@ public class ProductionCompanyServiceImpl implements ProductionCompanyService {
 
     @Override
     public ProductionCompany update(ProductionCompany productionCompany) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.update(productionCompany);
-//        return productionCountryRepository.saveAndFlush(productionCompany);
-        return productionCompany;
+        return productionCountryRepository.save(productionCompany);
     }
 
     @Override
     public Optional<ProductionCompany> findByCompany(String it) {
-//        return Optional.empty();
         return productionCountryRepository.findByName(it);
+    }
+
+    @Override
+    public List<ProductionCompany> findByActive() {
+        return productionCountryRepository.findByActive();
     }
 }

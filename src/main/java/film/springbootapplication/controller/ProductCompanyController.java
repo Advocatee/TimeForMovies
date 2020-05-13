@@ -26,7 +26,7 @@ public class ProductCompanyController extends BaseController<ProductionCompanySe
 
     @GetMapping(value = "/companies")
     public List<ProductionCompany> productionCountryList() {
-        return service.getAll();
+        return service.findByActive();
     }
 
     @GetMapping(value = "/companies/{id}")
@@ -48,7 +48,8 @@ public class ProductCompanyController extends BaseController<ProductionCompanySe
     }
 
     @PutMapping("/companies/{id}")
-    public ProductionCompany update(@PathVariable UpdateProductionCompanyDto dto) {
+    public ProductionCompany update(@RequestBody UpdateProductionCompanyDto dto, @PathVariable Long id) {
+        dto.setId(id);
         validate(dto, new ProductionCompanyValidator());
         ProductionCompany company = getModelMapper().map(dto, ProductionCompany.class);
         return service.update(company);
