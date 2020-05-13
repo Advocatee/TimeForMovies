@@ -9,9 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 public class GenreController extends BaseController<GenreService> {
@@ -27,8 +26,7 @@ public class GenreController extends BaseController<GenreService> {
 
     @GetMapping(value = "/genres")
     public List<Genre> findGenres() {
-//        return service.getAll();
-        return Collections.singletonList(service.findByActive());
+        return service.findByActive();
     }
 
     @GetMapping(value = "/genres/{id}")

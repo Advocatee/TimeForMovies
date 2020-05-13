@@ -54,7 +54,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public Genre findByActive() {
+    public List<Genre> findByActive() {
         return genreRepository.findByActive();
     }
 }
