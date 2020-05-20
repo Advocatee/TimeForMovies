@@ -1,6 +1,5 @@
 package film.springbootapplication.service.impl;
 
-import film.springbootapplication.model.Genre;
 import film.springbootapplication.model.Movie;
 import film.springbootapplication.repository.MovieRepository;
 import film.springbootapplication.service.MovieService;

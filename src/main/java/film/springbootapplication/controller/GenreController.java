@@ -5,6 +5,7 @@ import film.springbootapplication.dto.UpdateGenreDto;
 import film.springbootapplication.model.Genre;
 import film.springbootapplication.service.GenreService;
 import film.springbootapplication.validator.GenreValidator;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,8 +36,12 @@ public class GenreController extends BaseController<GenreService> {
         return getModelMapper().map(genre, InfoGenreDto.class);
     }
 
+    @SneakyThrows
     @PostMapping("/genres")
     public InfoGenreDto addGenre(@RequestBody UpdateGenreDto dto) {
+//        if (dto.getName().isEmpty()) {
+//            throw new Exception("Name Should'n be empty");
+//        }
         validate(dto, genreValidator);
         Genre genre = getModelMapper().map(dto, Genre.class);
         return getModelMapper().map(service.create(genre), InfoGenreDto.class);

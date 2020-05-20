@@ -12,6 +12,8 @@ public interface GenreRepository extends BaseRepository<Genre> {
     @Query("from Genre as g where g.active = true  ")
     List<Genre> findByActive();
 
+    Genre findGenreByName(String name);
+
     @Query("from Genre where (:updated is null or updated = :updated) and id = :id ")
     Genre findGenreById(Long id, Date updated);
 

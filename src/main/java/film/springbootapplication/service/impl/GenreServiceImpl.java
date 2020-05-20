@@ -35,7 +35,6 @@ public class GenreServiceImpl implements GenreService {
         return activeGenre.getId();
     }
 
-
     @Override
     public Genre create(Genre genre) {
         return genreRepository.save(genre);
@@ -46,11 +45,11 @@ public class GenreServiceImpl implements GenreService {
         return genreRepository.save(genre);
     }
 
-
     @Override
     public Genre findByName(String genreName) {
 //        return genreRepository.findByName(genreName);
-        return null;
+        return genreRepository.findGenreByName(genreName);
+//        return null;
     }
 
     @Override

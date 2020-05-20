@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -63,13 +64,13 @@ public class ModelMapperFactoryImpl implements ModelMapperFactory {
     private final Converter<Set<Genre>, List<String>> genreListToGenreListConverter = ctx -> ctx.getSource().stream().map(Genre::getName).collect(Collectors.toList());
 
     private final Converter<Set<String>, Set<Genre>> genreNameToGenreConverter = ctx -> ctx.getSource().parallelStream().map(it -> {
-        Genre found = genreService.findByName(it);
-        if (found == null) {
-            throw new EntityExistsException();
-        } else
-            return found;
-//        Optional<Genre> genre = genreService.findByName(it);
-//        return genre.orElseThrow(EntityNotFoundException::new);
+//        Genre found = genreService.findByName(it);
+//        if (found == null) {
+//            throw new EntityExistsException();
+//        } else
+//            return found;
+        Optional<Genre> genre = Optional.ofNullable(genreService.findByName(it));
+        return genre.orElseThrow(EntityNotFoundException::new);
     }).collect(Collectors.toSet());
 
     private final Converter<List<String>, List<ProductionCompany>> productCompanyNameToProductCompanyConverter = ctx -> ctx.getSource().parallelStream().map(it ->

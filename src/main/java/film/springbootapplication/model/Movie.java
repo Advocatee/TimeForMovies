@@ -29,5 +29,4 @@ public class Movie extends BaseSettingEntity {
     @JoinTable(name = "MOVIE_ProductionCountry", joinColumns = {@JoinColumn(name = "MOVIE_ID")},
             inverseJoinColumns = {@JoinColumn(name = "ProductionCountry_ID")})
     private List<ProductionCompany> country = new ArrayList<>();
-
 }
