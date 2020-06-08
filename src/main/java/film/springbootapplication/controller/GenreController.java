@@ -39,9 +39,6 @@ public class GenreController extends BaseController<GenreService> {
     @SneakyThrows
     @PostMapping("/genres")
     public InfoGenreDto addGenre(@RequestBody UpdateGenreDto dto) {
-//        if (dto.getName().isEmpty()) {
-//            throw new Exception("Name Should'n be empty");
-//        }
         validate(dto, genreValidator);
         Genre genre = getModelMapper().map(dto, Genre.class);
         return getModelMapper().map(service.create(genre), InfoGenreDto.class);
