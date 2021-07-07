@@ -1,6 +1,5 @@
 package film.springbootapplication.service.impl;
 
-import film.springbootapplication.model.Movie;
 import film.springbootapplication.model.ProductionCountry;
 import film.springbootapplication.repository.ProductionCountryRepository;
 import film.springbootapplication.service.ProductionCountryService;
@@ -15,32 +14,37 @@ import java.util.Optional;
 @Transactional
 public class ProductionCountryServiceImpl implements ProductionCountryService {
 
+//    @Override
+//    public ProductionCountry updateProductionById(Long id) {
+//        return productionCountryRepository.findById(id)
+//                .orElseThrow(() -> new EntityNotFoundException(String.format("ProductionCountry with ID [%d] not found", id)));
+//    }
+
     @Autowired
     private ProductionCountryRepository productionCountryRepository;
 
     @Override
-    public List<ProductionCountry> getAllProductionCountry() {
+    public List<ProductionCountry> getAll() {
         return productionCountryRepository.findAll();
     }
 
     @Override
-    public Optional<ProductionCountry> getProductionCountryById(Long id) {
+    public Optional<ProductionCountry> getById(Long id) {
         return productionCountryRepository.findById(id);
     }
 
     @Override
-    public void deleteProductionCountry(Long id) {
+    public void delete(Long id) {
         productionCountryRepository.deleteById(id);
     }
 
     @Override
-    public ProductionCountry createProductionCountry(ProductionCountry productionCountry) {
-        return productionCountryRepository.save(productionCountry);
+    public ProductionCountry create(ProductionCountry movie) {
+        return productionCountryRepository.saveAndFlush(movie);
     }
 
     @Override
-    public ProductionCountry updateProductionCountry(ProductionCountry productionCountry) {
-        return productionCountryRepository.save(productionCountry);
+    public ProductionCountry update(ProductionCountry movie) {
+        return null;
     }
-
 }

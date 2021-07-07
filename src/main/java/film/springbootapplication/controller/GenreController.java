@@ -1,47 +1,69 @@
 package film.springbootapplication.controller;
 
+import film.springbootapplication.dto.InfoGenreDto;
 import film.springbootapplication.dto.UpdateGenreDto;
 import film.springbootapplication.model.Genre;
 import film.springbootapplication.service.GenreService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping( value = "/genres")
-public class GenreController {
+public class GenreController extends BaseController {
+
+    private final GenreService service;
 
     @Autowired
-    GenreService genreService;
-
-    @GetMapping()
-    public List<Genre> movieList() {
-
-        return genreService.getAllGenres();
-
+    public GenreController(GenreService service) {
+        this.service = service;
     }
 
-    @GetMapping(value = "/{id}")
-    public Genre getById(@PathVariable Long id) {
-        return genreService.getGenreById(id).orElseThrow(() -> new EntityNotFoundException("No Genre with such ID"));
+    @GetMapping
+    public List<Genre> findGenres() {
+        return service.getAll();
     }
 
-    @PostMapping()
+    @GetMapping(value = "/genres/{id}")
+    public InfoGenreDto findGenre(@PathVariable Long id) {
+
+//        return genreService.getGenreById(id).orElseThrow(() -> new EntityNotFoundException("No Genre with such ID"));
+
+        Optional<Genre> genre = service.getById(id);
+
+        return getModelMapper().map(genre, InfoGenreDto.class);
+    }
+
+    @PostMapping("/genres")
     public Genre addGenre(@RequestBody UpdateGenreDto dto) {
-        //TODO Add ModelMapper
 
-        Genre g = new Genre();
-        g.setDataSource(dto.getDataSource());
-        g.setDataSourceId(dto.getDataSourceId());
-        g.setName(dto.getName());
+        ModelMapper modelMapper = new ModelMapper();
+        InfoGenreDto genreDto = modelMapper.map(dto, InfoGenreDto.class);
 
-        return genreService.createGenre(g);
+//        assert genreDto.getName().equals(dto.getName());
+//        assert genreDto.getId().equals(dto.getDataSourceId());
+//        assert genreDto.getMovies().equals(dto.getDataSource());
+//
+//
+//        //TODO Add ModelMapper
+//        Genre g = new Genre();
+//        g.setDataSource(dto.getDataSource());
+//        g.setDataSourceId(dto.getDataSourceId());
+//        g.setName(dto.getName());
+
+//        return service.create(g);
+        return null;
     }
 
+    @DeleteMapping(value = "/genres/{id}")
+    public void removeGenre(@PathVariable Long id) {
+        service.delete(id);
+    }
 
-
-
+    @PutMapping(value = "/genres/{id}")
+    public Genre updateGenre(@PathVariable Genre id) {
+        return service.update(id);
+    }
 }

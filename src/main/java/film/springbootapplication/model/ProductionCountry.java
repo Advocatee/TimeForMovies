@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -13,12 +14,10 @@ public class ProductionCountry extends BaseEntity {
     @Column
     private String name;
     @Column
-    private String productCountry; //записываем откуда пришел этот жанр
+    private String productCountry;
     @Column
-    private String dataSourceId; //Id под которым он находится в стороннем сервисе
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MOVIE_ID")
-    private Movie movie;
+    private String dataSourceId;
+    @ManyToMany(mappedBy = "country")
+    private Set<Movie> movie;
 
 }
