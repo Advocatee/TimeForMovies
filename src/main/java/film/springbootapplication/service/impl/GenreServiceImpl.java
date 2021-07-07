@@ -17,30 +17,43 @@ public class GenreServiceImpl implements GenreService {
     @Autowired
     private GenreRepository genreRepository;
 
-    @Transactional(readOnly = true)
     @Override
-    public List<Genre> getAllGenres() {
+    public List<Genre> getAll() {
         return genreRepository.findAll();
     }
 
-    @Transactional
     @Override
-    public Optional<Genre> getGenreById(Long id) {
+    public Optional<Genre> getById(Long id) {
         return genreRepository.findById(id);
     }
 
     @Override
-    public void deleteGenre(Long id) {
-        genreRepository.deleteById(id);
+    public Long delete(Long id) {
+        Genre activeGenre = genreRepository.findByIdAndActive(id, true);
+            activeGenre.setActive(false);
+            genreRepository.save(activeGenre);
+        return activeGenre.getId();
     }
 
     @Override
-    public Genre createGenre(Genre genre) {
+    public Genre create(Genre genre) {
         return genreRepository.save(genre);
     }
 
     @Override
-    public Genre updateGenre(Genre genre) {
+    public Genre update(Genre genre) {
         return genreRepository.save(genre);
+    }
+
+    @Override
+    public Genre findByName(String genreName) {
+//        return genreRepository.findByName(genreName);
+        return genreRepository.findGenreByName(genreName);
+//        return null;
+    }
+
+    @Override
+    public List<Genre> findByActive() {
+        return genreRepository.findByActive();
     }
 }
